@@ -63,23 +63,25 @@ const registerData = reactive({
 })
 
 function register() {
-  api
-    .post('api/register', registerData)
-    .then((r) => {
-      Notify.create({
-        type: 'positive',
-        position: 'top',
-        message: 'register successful ' + r.data.message,
+  if (registerData.password == confirmpassword.value) {
+    api
+      .post('api/register', registerData)
+      .then((r) => {
+        Notify.create({
+          type: 'positive',
+          position: 'top',
+          message: 'register successful ' + r.data.message,
+        })
+        router.push('/')
       })
-      router.push('/')
-    })
-    .catch((e) => {
-      console.log(e)
-      Notify.create({
-        type: 'negative',
-        position: 'top',
-        message: 'register in cach ' + e,
+      .catch((e) => {
+        console.log(e)
+        Notify.create({
+          type: 'negative',
+          position: 'top',
+          message: 'register in cach ' + e,
+        })
       })
-    })
+  }
 }
 </script>

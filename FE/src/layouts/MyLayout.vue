@@ -8,6 +8,7 @@
         <q-btn flat round dense icon="menu" @click="toggleLeftDrawer" />
 
         <q-toolbar-title> Header </q-toolbar-title>
+        <q-btn to="/">Index Page</q-btn>
       </q-toolbar>
 
       <!-- <q-tabs>
