@@ -46,12 +46,28 @@ function login() {
       scope: '*',
     })
     .then((r) => {
+      if (r.data.access_token) {
+        localStorage.setItem('access_token', r.data.access_token)
+        api.defaults.headers = {
+          Authorization: 'Bearer ' + localStorage.getItem('access_token'),
+          'Content-Type': 'application/json',
+          Accept: 'application/json;charset=UTF-8',
+        }
+      }
       Notify.create({
         type: 'positive',
         position: 'top',
         message: 'Login successfull ' + r.data.message,
       })
       router.push('/')
+    })
+    .catch((e) => {
+      console.log(e)
+      Notify.create({
+        type: 'negative',
+        position: 'top',
+        message: 'Login successfull ' + e,
+      })
     })
 }
 </script>

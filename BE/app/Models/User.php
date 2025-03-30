@@ -23,7 +23,6 @@ class User extends Authenticatable
     {
         return $this->orWhere('email', $identifier)
             ->orWhere('mobile', $identifier)
-            ->orWhere('name', $identifier)
             ->first();
     }
 
