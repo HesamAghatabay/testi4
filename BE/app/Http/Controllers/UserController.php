@@ -27,4 +27,29 @@ class UserController extends Controller
             "message" => "register user successfully",
         ], 201);
     }
+
+    function sendverify(Request $request)
+    {
+        $code = rand(1000000, 99999999);
+        if ($user = User::where('mobile', $request->mobile)->first()) {
+            $user->password = $code;
+            $user->save();
+            // return response()->json(['status' => true, 'message' => 'user alredy exist'], 400);
+        } else {
+            $user = User::create([
+                'name' => '',
+                'mobile' => $request->mobile,
+                'email' => $request->email,
+                'password' => $code,
+            ]);
+        }
+        $user->sendVerifyCode($code, $request->mobile);
+        if (!$user->sendVerifyCode($code, $request->mobile)) {
+            return response()->json(['status' => false, 'message' => 'error in Send Verify Code'], 400);
+        } else {
+            return response()->json(['status' => true], 201);
+        }
+
+    }
+
 }
