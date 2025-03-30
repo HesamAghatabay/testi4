@@ -18,6 +18,15 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+
+    public function findForPassport($identifier)
+    {
+        return $this->orWhere('email', $identifier)
+            ->orWhere('mobile', $identifier)
+            ->orWhere('name', $identifier)
+            ->first();
+    }
+
     protected $fillable = [
         'name',
         'mobile',

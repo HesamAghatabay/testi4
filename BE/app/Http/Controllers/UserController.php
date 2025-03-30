@@ -14,7 +14,7 @@ class UserController extends Controller
             "name" => $request->name,
             "mobile" => $request->mobile,
             "email" => $request->email,
-            "password" => Hash::make($request->password),
+            "password" => $request->password,
         ]);
         if (!$user) {
             return response()->json([

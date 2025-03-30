@@ -25,21 +25,33 @@
 </template>
 
 <script setup>
+import { Notify } from 'quasar'
 import { api } from 'src/boot/axios'
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const mobile = ref('')
 const password = ref('')
 const isPwd = ref(true)
+const router = useRouter()
 
 function login() {
-  api.post('oauth/token', {
-    grant_type: 'password',
-    client_id: 2,
-    client_secret: 'EzB4uJuRnPClYPOt3GS82YntZyYw4QjwVHTdQAtk',
-    username: mobile.value,
-    password: password.value,
-    scope: '*',
-  })
+  api
+    .post('oauth/token', {
+      username: mobile.value,
+      password: password.value,
+      grant_type: 'password',
+      client_id: 2,
+      client_secret: 'EzB4uJuRnPClYPOt3GS82YntZyYw4QjwVHTdQAtk',
+      scope: '*',
+    })
+    .then((r) => {
+      Notify.create({
+        type: 'positive',
+        position: 'top',
+        message: 'Login successfull ' + r.data.message,
+      })
+      router.push('/')
+    })
 }
 </script>
