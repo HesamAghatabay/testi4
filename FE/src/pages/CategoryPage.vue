@@ -1,7 +1,7 @@
 <template>
   <q-page padding>
     <!-- content -->
-    <h3> Send Verify Page</h3>
+    <q-btn to="create-category" color="green-9">Create New Category</q-btn>
 
   </q-page>
 </template>
