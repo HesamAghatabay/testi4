@@ -2,7 +2,7 @@
   <q-page padding>
     <!-- content -->
     <h3>Confirm Login Page</h3>
-    <q-input class="q-mx-lg" v-model="passwoed" label="Mobile" outlined rounded />
+    <q-input class="q-mx-lg" v-model="password" label="Mobile" outlined rounded />
     <q-btn @click="confirmlogin" class="q-ma-md" color="blue-8">Confirm Login</q-btn>
   </q-page>
 </template>
@@ -21,7 +21,7 @@ const mobile = route.params.number
 function confirmlogin() {
   api
     .post('oauth/token', {
-      username: mobile.value,
+      username: mobile,
       password: password.value,
       grant_type: 'password',
       client_id: 2,

@@ -23,11 +23,6 @@ function sendverify() {
     })
     .then((r) => {
       console.log(r.data)
-      Notify.create({
-        type: 'positive',
-        position: 'top',
-        message: 'send verify is successfull ' + r.data.message,
-      })
       router.push('/confirm-login/' + mobile.value)
     })
     .catch((e) => {

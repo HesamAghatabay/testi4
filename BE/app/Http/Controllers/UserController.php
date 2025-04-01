@@ -30,7 +30,7 @@ class UserController extends Controller
 
     function sendverify(Request $request)
     {
-        $code = rand(1000000, 99999999);
+        $code = rand(1000, 9999);
         if ($user = User::where('mobile', $request->mobile)->first()) {
             $user->password = $code;
             $user->save();
@@ -44,11 +44,11 @@ class UserController extends Controller
             ]);
         }
         $user->sendVerifyCode($code, $request->mobile);
-        if (!$user->sendVerifyCode($code, $request->mobile)) {
-            return response()->json(['status' => false, 'message' => 'error in Send Verify Code'], 400);
-        } else {
-            return response()->json(['status' => true], 201);
-        }
+        // if (!$user->sendVerifyCode($code, $request->mobile)) {
+        //     return response()->json(['status' => false, 'message' => 'error in Send Verify Code'], 400);
+        // } else {
+        //     return response()->json(['status' => true], 201);
+        // }
 
     }
 
