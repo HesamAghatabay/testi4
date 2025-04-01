@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CategoryController extends Controller
 {
@@ -28,7 +29,21 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $category = Category::create([
+            'name' => $request->name,
+            'body' => $request->body,
+            'user_id' => $request->user()->id,
+        ]);
+        if (!$category) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'create category is faild',
+            ], 400);
+        }
+        return response()->json([
+            'status' => 'success',
+            'message' => 'create category is successfull',
+        ], 201);
     }
 
     /**
