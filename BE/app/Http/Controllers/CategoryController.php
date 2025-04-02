@@ -60,7 +60,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+
     }
 
     /**
@@ -68,7 +68,15 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        $category->update([
+            'name' => $request->name,
+            'body' => $request->body,
+        ]);
+        if (!$category) {
+            return response()->json(['status' => false], 400);
+        }
+        return response()->json(['status' => true], 200);
+
     }
 
     /**
