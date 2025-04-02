@@ -10,7 +10,7 @@ const routes = [
       { path: '/confirm-login/:number', component: () => import('pages/ConfirmLogin.vue') },
       { path: '/category', component: () => import('pages/CategoryPage.vue') },
       { path: '/create-category', component: () => import('pages/CreateCategory.vue') },
-      { path: '/edit-category', component: () => import('pages/EditCategory.vue') },
+      { path: '/edit-category/:id', component: () => import('pages/EditCategory.vue') },
     ],
   },
 
