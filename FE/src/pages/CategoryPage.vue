@@ -5,10 +5,10 @@
 
     <q-btn to="create-category" class="q-my-md" color="green-9">Create New Category</q-btn>
 
-    <div class="row">
+    <div class="row" v-for="(category, index) in categories" :key="'category' + index">
       <div class="col">{{ category?.name || 'بدون نام' }}</div>
       <div class="col">{{ category?.body || 'بدون بادی' }}</div>
-      <div class="col">{{ category?.user || 'بدون یوزر' }}</div>
+      <div class="col">{{ category?.user.name || 'بدون یوزر' }}</div>
       <div class="col">edit</div>
       <div class="col">delete</div>
       <div class="col">show</div>
@@ -20,16 +20,16 @@
 import { api } from 'src/boot/axios'
 import { onMounted, ref } from 'vue'
 
-const category = ref(null)
+const categories = ref(null)
 
 const loading = ref(false)
 onMounted(() => {
   loading.value = true
   api
-    .get('category')
+    .get('api/category')
     .then((r) => {
       console.log('category', r.data)
-      category.value = r.data
+      categories.value = r.data
     })
     .catch((e) => {
       console.log(e)

@@ -12,6 +12,8 @@ class Category extends Model
         "name",
         "body",
         "user_id",
-
     ];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
 }

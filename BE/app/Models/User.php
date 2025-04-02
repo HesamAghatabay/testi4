@@ -84,4 +84,8 @@ class User extends Authenticatable
         echo $res->getBody();
 
     }
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }
