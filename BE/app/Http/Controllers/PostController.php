@@ -46,7 +46,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return response()->json($post, 200);
     }
 
     /**
@@ -60,9 +60,18 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(Request $request, $id)
     {
-        //
+        $post = Post::findOrFail($id);
+        $post->update([
+            'name' => $request->name,
+            'category_id' => $request->category,
+            'body' => $request->body,
+        ]);
+        if (!$post) {
+            return response()->json(['status' => 'false'], 400);
+        }
+        return response()->json(['status' => 'success'], 200);
     }
 
     /**

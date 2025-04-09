@@ -41,7 +41,7 @@ function create() {
       Notify.create({
         type: 'negative',
         position: 'top',
-        message: 'create category in cach ' + e,
+        message: 'create post in cach ' + e,
       })
     })
 }
