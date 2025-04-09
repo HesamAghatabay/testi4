@@ -12,4 +12,4 @@ Route::get('/user', function (Request $request) {
 Route::post('register', [UserController::class, 'register'])->name('register');
 Route::post('sendverify', [UserController::class, 'sendverify'])->name('sendverify');
 Route::middleware('auth:api')->resource('category', CategoryController::class);
-Route::middleware('api:auth')->resource('post', PostController::class);
+Route::middleware('auth:api')->resource('post', PostController::class);

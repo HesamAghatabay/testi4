@@ -12,7 +12,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::all();
+        return response()->json($posts, 200);
     }
 
     /**
@@ -31,7 +32,7 @@ class PostController extends Controller
         $post = Post::create([
             'name' => $request->name,
             'body' => $request->body,
-            'user_id' => $request->user_id,
+            'user_id' => $request->user()->id,
             'category_id' => $request->category,
         ]);
         if (!$post) {

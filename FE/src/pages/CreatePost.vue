@@ -29,12 +29,11 @@ function create() {
     .post('api/post', post)
     .then((r) => {
       console.log(r.data)
-      Notify >
-        create({
-          type: 'positive',
-          position: 'top',
-          message: 'create post successful ' + r.data.message,
-        })
+      Notify.create({
+        type: 'positive',
+        position: 'top',
+        message: 'create post successful ' + r.data.message,
+      })
       router.push('discover-post')
     })
     .catch((e) => {

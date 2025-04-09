@@ -6,7 +6,6 @@
     <q-input v-model="category.name" type="text" label="name" outlined rounded />
     <q-input v-model="category.body" type="textarea" label="body" outlined rounded />
     <q-btn color="yellow-9" class="q-ma-sm" @click="edit"> Edit </q-btn>
-
   </q-page>
 </template>
 
@@ -19,7 +18,7 @@ import { useRoute, useRouter } from 'vue-router'
 
 const categoryData = usecategoryData()
 const route = useRoute()
-const router =useRouter()
+const router = useRouter()
 const category = reactive({
   name: null,
   body: null,
@@ -27,8 +26,8 @@ const category = reactive({
 
 onMounted(() => {
   if (categoryData.category.length > 0) {
-    category.body = categoryData.category[categoryData.currentCategoryIndex].body
-    category.name = categoryData.category[categoryData.currentCategoryIndex].name
+    ;(category.name = categoryData.category[categoryData.currentCategoryIndex].name),
+      (category.body = categoryData.category[categoryData.currentCategoryIndex].body)
   } else {
     fetchCategory()
   }
@@ -55,7 +54,7 @@ function fetchCategory() {
       }
     })
 }
-function edit(){
+function edit() {
   api
     .put('api/category/' + route.params.id, category)
     .then((r) => {
