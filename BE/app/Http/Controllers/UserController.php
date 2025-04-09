@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Profile;
 use App\Models\User;
+use GuzzleHttp\Promise\Create;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -16,6 +18,9 @@ class UserController extends Controller
             "email" => $request->email,
             "password" => $request->password,
         ]);
+        $profile = Profile::create(['full_name' => 'Test']);
+        $user->profile()->associate($profile);
+        $user->save();
         if (!$user) {
             return response()->json([
                 "status" => "error",

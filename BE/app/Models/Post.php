@@ -8,4 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use SoftDeletes;
+    public function Likes()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }

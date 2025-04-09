@@ -44,12 +44,17 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
+    public function profile()
+    {
+        return $this->hasOne(User::class);
+    }
 
     /**
      * Get the attributes that should be cast.
      *
      * @return array<string, string>
      */
+
     protected function casts(): array
     {
         return [
