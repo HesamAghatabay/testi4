@@ -12,4 +12,10 @@ class Post extends Model
     {
         return $this->belongsToMany(User::class);
     }
+    protected $fillable = [
+        'name',
+        'body',
+        'user_id',
+        'category_id',
+    ];
 }

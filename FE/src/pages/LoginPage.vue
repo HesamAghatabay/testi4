@@ -46,6 +46,7 @@ function login() {
       scope: '*',
     })
     .then((r) => {
+      console.log('status', r.data)
       if (r.data.access_token) {
         localStorage.setItem('access_token', r.data.access_token)
         api.defaults.headers = {
@@ -66,7 +67,7 @@ function login() {
       Notify.create({
         type: 'negative',
         position: 'top',
-        message: 'Login successfull ' + e,
+        message: 'Login catch ' + e,
       })
     })
 }

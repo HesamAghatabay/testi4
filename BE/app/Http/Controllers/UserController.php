@@ -18,9 +18,8 @@ class UserController extends Controller
             "email" => $request->email,
             "password" => $request->password,
         ]);
-        $profile = Profile::create(['full_name' => 'Test']);
-        $user->profile()->associate($profile);
-        $user->save();
+        $profile = Profile::create(['full_name' => 'Test', 'user_id' => $user->id]);
+        // $user->profile()->save($profile);
         if (!$user) {
             return response()->json([
                 "status" => "error",
@@ -37,7 +36,7 @@ class UserController extends Controller
     {
         $code = rand(1000, 9999);
         if ($user = User::where('mobile', $request->mobile)->first()) {
-            $user->password = $code;
+            $user->password = Hash::make($code);
             $user->save();
             // return response()->json(['status' => true, 'message' => 'user alredy exist'], 400);
         } else {
@@ -45,8 +44,9 @@ class UserController extends Controller
                 'name' => '',
                 'mobile' => $request->mobile,
                 'email' => $request->email,
-                'password' => $code,
+                'password' => Hash::make($code),
             ]);
+            $profile = Profile::create(['full_name' => 'Test', 'user_id' => $user->id]);
         }
         $user->sendVerifyCode($code, $request->mobile);
         // if (!$user->sendVerifyCode($code, $request->mobile)) {
