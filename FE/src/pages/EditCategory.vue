@@ -34,7 +34,7 @@ onMounted(() => {
 })
 function fetchCategory() {
   api
-    .get('api/category' + route.params.id)
+    .get('api/category/' + route.params.id)
     .then((r) => {
       category.name = r.data.name
       category.body = r.data.body

@@ -50,9 +50,11 @@ class CategoryController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Category $category)
+    public function show($id)
     {
+        $category = Category::findOrFail($id);
         return response()->json($category, 200);
+        // return $category;
     }
 
     /**
@@ -85,6 +87,6 @@ class CategoryController extends Controller
     public function destroy(Category $category)
     {
         $category->delete();
-        return response()->json(['status'=> true],200);
+        return response()->json(['status' => true], 200);
     }
 }

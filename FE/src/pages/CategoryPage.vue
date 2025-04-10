@@ -23,7 +23,17 @@
       <div class="col">
         <q-btn color="red-8" @click="deletecategory(category.id)"> delete </q-btn>
       </div>
-      <div class="col"><q-btn color="green-9" @click="show(category.id)"> show </q-btn></div>
+      <div class="col">
+        <q-btn
+          color="green-9"
+          @click="
+            categoryData.currentCategoryIndex = index;
+            $router.push('show-category/' + category.id)
+          "
+        >
+          show
+        </q-btn>
+      </div>
     </div>
   </q-page>
 </template>
@@ -35,7 +45,7 @@ import { usecategoryData } from 'src/stores/categoryData'
 import { onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
-const categories = ref(null)
+const categories = ref([])
 const loading = ref(false)
 const categoryData = usecategoryData()
 const router = useRouter()
@@ -73,17 +83,6 @@ function deletecategory(id) {
         position: 'top',
         message: 'delete post in cach ' + e,
       })
-    })
-}
-function show(id) {
-  api
-    .get(`api/category/${id}`)
-    .then((r) => {
-      categoryData.currentCategoryIndex = r.data.category
-      router.push('show-category/' + id)
-    })
-    .catch((e) => {
-      console.log(e)
     })
 }
 </script>

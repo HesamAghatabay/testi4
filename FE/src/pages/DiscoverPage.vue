@@ -26,6 +26,7 @@
               Edit
             </q-btn>
             <q-btn color="red-9" @click="deletepost(post.id)">Delete</q-btn>
+            <q-btn color="info" @click="$router.push('show-post/' + post.id)">Show</q-btn>
           </q-card-action>
         </q-card>
       </div>

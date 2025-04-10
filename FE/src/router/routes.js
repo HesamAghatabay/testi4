@@ -15,6 +15,7 @@ const routes = [
       { path: '/discover-post', component: () => import('pages/DiscoverPage.vue') },
       { path: '/create-post', component: () => import('pages/CreatePost.vue') },
       { path: '/edit-post/:id', component: () => import('pages/EditPost.vue') },
+      { path: '/show-post/:id', component: () => import('pages/PostsPage.vue') },
     ],
   },
 
