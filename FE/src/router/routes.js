@@ -11,6 +11,7 @@ const routes = [
       { path: '/category', component: () => import('pages/CategoryPage.vue') },
       { path: '/create-category', component: () => import('pages/CreateCategory.vue') },
       { path: '/edit-category/:id', component: () => import('pages/EditCategory.vue') },
+      { path: '/show-category/:id', component: () => import('pages/ShowCategory.vue') },
       { path: '/discover-post', component: () => import('pages/DiscoverPage.vue') },
       { path: '/create-post', component: () => import('pages/CreatePost.vue') },
       { path: '/edit-post/:id', component: () => import('pages/EditPost.vue') },

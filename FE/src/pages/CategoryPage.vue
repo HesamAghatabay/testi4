@@ -20,20 +20,25 @@
           edit
         </q-btn>
       </div>
-      <div class="col"><q-btn color="red-8"> delete </q-btn></div>
-      <div class="col"><q-btn color="green-9"> show </q-btn></div>
+      <div class="col">
+        <q-btn color="red-8" @click="deletecategory(category.id)"> delete </q-btn>
+      </div>
+      <div class="col"><q-btn color="green-9" @click="show(category.id)"> show </q-btn></div>
     </div>
   </q-page>
 </template>
 
 <script setup>
+import { Notify } from 'quasar'
 import { api } from 'src/boot/axios'
 import { usecategoryData } from 'src/stores/categoryData'
 import { onMounted, ref } from 'vue'
+import { useRouter } from 'vue-router'
 
 const categories = ref(null)
 const loading = ref(false)
 const categoryData = usecategoryData()
+const router = useRouter()
 
 onMounted(() => {
   loading.value = true
@@ -51,4 +56,34 @@ onMounted(() => {
       loading.value = false
     })
 })
+function deletecategory(id) {
+  api
+    .delete(`api/category/${id}`)
+    .then((r) => {
+      Notify.create({
+        type: 'positive',
+        position: 'top',
+        message: 'delete category successful ' + r.data.message,
+      })
+      router.push('/')
+    })
+    .catch((e) => {
+      Notify.create({
+        type: 'negative',
+        position: 'top',
+        message: 'delete post in cach ' + e,
+      })
+    })
+}
+function show(id) {
+  api
+    .get(`api/category/${id}`)
+    .then((r) => {
+      categoryData.currentCategoryIndex = r.data.category
+      router.push('show-category/' + id)
+    })
+    .catch((e) => {
+      console.log(e)
+    })
+}
 </script>
