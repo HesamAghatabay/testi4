@@ -18,4 +18,13 @@ class Post extends Model
         'user_id',
         'category_id',
     ];
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+    public function auther()
+    {
+        return $this->belongsTo(User::class)->with('profile');
+    }
+
 }

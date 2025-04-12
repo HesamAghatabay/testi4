@@ -12,9 +12,15 @@
           <q-card-section>
             <h4>{{ post?.name || 'بدون نام' }}</h4>
           </q-card-section>
+
+          <q-card-section>
+            <h6>{{ post.auther.full_name || 'بدون نام' }}</h6>
+          </q-card-section>
+
           <q-card-section>
             <p>{{ post?.body || 'بدون بادی' }}</p>
           </q-card-section>
+
           <q-card-action>
             <q-btn
               color="amber-9"

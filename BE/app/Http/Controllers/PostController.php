@@ -12,8 +12,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::all();
+        // $posts = Post::all();
+        // return response()->json($posts, 200);
+        $posts = Post::where('user_id', '!=', null)->with('user')->get();
+        foreach ($posts as $post) {
+            $post->auther = $post->user->profile;
+        }
         return response()->json($posts, 200);
+        // return $posts;
     }
 
     /**
@@ -80,6 +86,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return response()->json(['status'=> 'true'],200);
+        return response()->json(['status' => 'true'], 200);
     }
 }
