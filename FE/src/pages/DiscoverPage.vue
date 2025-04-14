@@ -21,10 +21,10 @@
             <p>{{ post?.body || 'بدون بادی' }}</p>
           </q-card-section>
 
-          <!-- <q-card-caption>
-            <q-btn v-if="post.Like.length > 0" @click="unLike(index)"> unLike </q-btn>
+          <q-card-caption>
+            <q-btn v-if="post.Likes.length > 0" @click="unLike(index)"> unLike </q-btn>
             <q-btn v-else @click="Like(index)"> Like </q-btn>
-          </q-card-caption> -->
+          </q-card-caption>
 
           <br />
           <q-card-action align="around">
@@ -98,6 +98,24 @@ function deletepost(id) {
         position: 'top',
         message: 'delete post in cach ' + e,
       })
+    })
+}
+function Like(index) {
+  api
+    .post('api/post/' + posts.value[index].id + '/Like', {
+      Liked: true,
+    })
+    .then(() => {
+      posts.value[index].Like = true
+    })
+}
+function unLike(index) {
+  api
+    .post('api/post/' + posts.value[index].id + '/unLike', {
+      Liked: true,
+    })
+    .then(() => {
+      posts.value[index].Like = false
     })
 }
 </script>
