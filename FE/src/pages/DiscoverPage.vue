@@ -14,7 +14,7 @@
           </q-card-section>
 
           <q-card-section>
-            <!-- <h6>{{ post.auther.full_name || 'بدون نام' }}</h6> -->
+            <h6>{{ post?.auther.full_name || 'بدون نام' }}</h6>
           </q-card-section>
 
           <q-card-section>

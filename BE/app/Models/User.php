@@ -85,10 +85,10 @@ class User extends Authenticatable
         echo $res->getBody();
 
     }
-    
+
     public function profile()
     {
-        return $this->hasOne(User::class);
+        return $this->hasOne(Profile::class);
     }
 
     public function categories()
