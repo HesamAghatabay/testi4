@@ -44,10 +44,6 @@ class User extends Authenticatable
         'password',
         'remember_token',
     ];
-    public function profile()
-    {
-        return $this->hasOne(User::class);
-    }
 
     /**
      * Get the attributes that should be cast.
@@ -77,22 +73,29 @@ class User extends Authenticatable
 
         ];
         $body = '{
-  "code": "23gu0ju6r9ce99a",
-  "sender": "+983000505",
-  "recipient": "' . $mobile . '",
-  "variable": {
-    "code": "' . $code . '"
-  }
-}';
+            "code": "23gu0ju6r9ce99a",
+            "sender": "+983000505",
+            "recipient": "' . $mobile . '",
+            "variable": {
+                "code": "' . $code . '"
+                }
+                }';
         $request = new Request('POST', 'https://api2.ippanel.com/api/v1/sms/pattern/normal/send', $headers, $body);
         $res = $client->sendAsync($request)->wait();
         echo $res->getBody();
 
     }
+    
+    public function profile()
+    {
+        return $this->hasOne(User::class);
+    }
+
     public function categories()
     {
         return $this->hasMany(Category::class);
     }
+
     public function posts()
     {
         return $this->hasMany(Post::class);

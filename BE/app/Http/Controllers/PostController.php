@@ -12,13 +12,14 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts = Post::all();
+        $posts = Post::all();
         // return response()->json($posts, 200);
-        $posts = Post::where('user_id', '!=', null)->with('user')->get();
+        $posts = Post::where('user_id', '!=', null)->with('user', 'Likes')->get();
         foreach ($posts as $post) {
-            $post->auther = $post->user->profile;
+            return $post->user->profile;
+        //     $post->auther = $post->user->profile;
         }
-        return response()->json($posts, 200);
+        // return response()->json($posts, 200);
         // return $posts;
     }
 

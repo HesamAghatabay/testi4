@@ -14,14 +14,20 @@
           </q-card-section>
 
           <q-card-section>
-            <h6>{{ post.auther.full_name || 'بدون نام' }}</h6>
+            <!-- <h6>{{ post.auther.full_name || 'بدون نام' }}</h6> -->
           </q-card-section>
 
           <q-card-section>
             <p>{{ post?.body || 'بدون بادی' }}</p>
           </q-card-section>
 
-          <q-card-action>
+          <!-- <q-card-caption>
+            <q-btn v-if="post.Like.length > 0" @click="unLike(index)"> unLike </q-btn>
+            <q-btn v-else @click="Like(index)"> Like </q-btn>
+          </q-card-caption> -->
+
+          <br />
+          <q-card-action align="around">
             <q-btn
               color="amber-9"
               @click="

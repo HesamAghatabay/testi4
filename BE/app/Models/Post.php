@@ -8,10 +8,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
     use SoftDeletes;
-    public function Likes()
-    {
-        return $this->belongsToMany(User::class);
-    }
     protected $fillable = [
         'name',
         'body',
@@ -22,9 +18,14 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
     public function auther()
     {
         return $this->belongsTo(User::class)->with('profile');
     }
 
+    public function Likes()
+    {
+        return $this->belongsToMany(User::class);
+    }
 }
