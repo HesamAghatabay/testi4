@@ -5,12 +5,13 @@
 
     <q-btn to="create-category" class="q-my-md" color="green-9">Create New Category</q-btn>
 
-    <div class="row q-ma-md" v-for="(category, index) in categories" :key="'category' + index">
+    <div class="row q-ma-md" v-for="(category, index) in categories" :key="category.id">
       <div class="col">{{ category?.name || 'بدون نام' }}</div>
       <div class="col">{{ category?.body || 'بدون بادی' }}</div>
       <div class="col">{{ category?.auther.full_name || 'بدون یوزر' }}</div>
       <div class="col">
-        <!-- <q-btn @click="" /> -->
+        <q-btn @click="like(category.id)" icon="favorite_outline" unelevated round />
+        <q-btn @click="like(category.id)" icon="favorite" color="red" unelevated round />
       </div>
       <div class="col">
         <q-btn
