@@ -5,10 +5,13 @@
 
     <q-btn to="create-category" class="q-my-md" color="green-9">Create New Category</q-btn>
 
-    <div class="row" v-for="(category, index) in categories" :key="'category' + index">
+    <div class="row q-ma-md" v-for="(category, index) in categories" :key="'category' + index">
       <div class="col">{{ category?.name || 'بدون نام' }}</div>
       <div class="col">{{ category?.body || 'بدون بادی' }}</div>
       <div class="col">{{ category?.user.name || 'بدون یوزر' }}</div>
+      <div class="col">
+        <q-btn></q-btn>
+      </div>
       <div class="col">
         <q-btn
           @click="
