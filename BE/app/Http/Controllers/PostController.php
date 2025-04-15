@@ -10,7 +10,7 @@ class PostController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         $posts = Post::all();
         // return response()->json($posts, 200);
@@ -18,6 +18,11 @@ class PostController extends Controller
         foreach ($posts as $post) {
             // return $post->user->profile;
             $post->auther = $post->user->profile;
+            foreach ($post->Likes as $Like) {
+                if ($request->user()->id == $Like->pivot->user_id) {
+                    $post->Like = true;
+                }
+            }
         }
         return response()->json($posts, 200);
         // return $posts;

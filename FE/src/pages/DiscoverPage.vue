@@ -13,6 +13,18 @@
             <h4>{{ post?.name || 'بدون نام' }}</h4>
           </q-card-section>
 
+          <q-card-caption>
+            <q-btn
+              v-if="post.Liked"
+              icon="favorite"
+              color="red"
+              unelevated
+              round
+              @click="unLike(index)"
+            />
+            <q-btn v-else @click="Like(index)" icon="favorite_outline" unelevated round />
+          </q-card-caption>
+
           <q-card-section>
             <h6>{{ post?.auther.full_name || 'بدون نام' }}</h6>
           </q-card-section>
@@ -20,11 +32,6 @@
           <q-card-section>
             <p>{{ post?.body || 'بدون بادی' }}</p>
           </q-card-section>
-
-          <q-card-caption>
-            <q-btn v-if="post.Likes.length > 0" @click="unLike(index)"> unLike </q-btn>
-            <q-btn v-else @click="Like(index)"> Like </q-btn>
-          </q-card-caption>
 
           <br />
           <q-card-action align="around">
