@@ -3,6 +3,7 @@
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -25,5 +26,19 @@ Route::middleware('auth:api')->post('post/{id}/unLike', function (Request $reque
     $post = Post::find($id);
     $user = $request->user();
     $post->Likes()->detach([$user->id]);
+    return response()->json(['status' => true]);
+});
+
+Route::middleware('auth:api')->post('category/{id}/like', function (Request $request, $id) {
+    $category = Category::find($id);
+    $user = $request->user();
+    $category->clikes()->sync([$user->id]);
+    return response()->json(['status' => true]);
+});
+
+Route::middleware('auth:api')->post('category/{id}/unlike', function (Request $request, $id) {
+    $category = Category::find($id);
+    $user = $request->user();
+    $category->clikes()->detach([$user->id]);
     return response()->json(['status' => true]);
 });

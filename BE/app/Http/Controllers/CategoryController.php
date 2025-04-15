@@ -13,7 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::with('user')->get();
+        $categories = Category::with('user','clikes')->get();
         foreach ($categories as $category) {
             $category->auther = $category->user->profile;
         }

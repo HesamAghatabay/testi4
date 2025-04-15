@@ -8,10 +8,18 @@
     <div class="row q-ma-md" v-for="(category, index) in categories" :key="category.id">
       <div class="col">{{ category?.name || 'بدون نام' }}</div>
       <div class="col">{{ category?.body || 'بدون بادی' }}</div>
+      <div class="col">{{ category?.clikes || 'بدون لایک' }}</div>
       <div class="col">{{ category?.auther.full_name || 'بدون یوزر' }}</div>
       <div class="col">
-        <q-btn @click="like(category.id)" icon="favorite_outline" unelevated round />
-        <q-btn @click="like(category.id)" icon="favorite" color="red" unelevated round />
+        <q-btn
+          v-if="category.clikes.length > 0"
+          @click="unlike(category.id)"
+          icon="favorite"
+          color="red"
+          unelevated
+          round
+        />
+        <q-btn v-else @click="like(category.id)" icon="favorite_outline" unelevated round />
       </div>
       <div class="col">
         <q-btn
@@ -88,5 +96,16 @@ function deletecategory(id) {
         message: 'delete post in cach ' + e,
       })
     })
+}
+function unlike(categoryId) {
+  api.post(`api/category/${categoryId}/unlike`,{
+    liked : true
+  })
+}
+
+function like(categoryId) {
+  api.post(`api/category/${categoryId}/like`,{
+    liked : false
+  })
 }
 </script>
