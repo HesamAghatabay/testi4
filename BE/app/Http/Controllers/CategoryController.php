@@ -14,6 +14,9 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::with('user')->get();
+        foreach ($categories as $category) {
+            $category->auther = $category->user->profile;
+        }
         return response()->json($categories, 200);
     }
 

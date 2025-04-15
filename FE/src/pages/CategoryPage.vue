@@ -8,9 +8,9 @@
     <div class="row q-ma-md" v-for="(category, index) in categories" :key="'category' + index">
       <div class="col">{{ category?.name || 'بدون نام' }}</div>
       <div class="col">{{ category?.body || 'بدون بادی' }}</div>
-      <div class="col">{{ category?.user.name || 'بدون یوزر' }}</div>
+      <div class="col">{{ category?.auther.full_name || 'بدون یوزر' }}</div>
       <div class="col">
-        <q-btn></q-btn>
+        <!-- <q-btn @click="" /> -->
       </div>
       <div class="col">
         <q-btn
