@@ -5,7 +5,7 @@
 
     <q-btn to="create-category" class="q-my-md" color="green-9">Create New Category</q-btn>
 
-    <div class="row q-ma-md" v-for="(category, index) in categories" :key="category.id">
+    <div class="row q-ma-md" v-for="(category, index) in categories" :key="'category' + index">
       <div class="col">{{ category?.name || 'بدون نام' }}</div>
       <div class="col">{{ category?.body || 'بدون بادی' }}</div>
       <div class="col">{{ category?.clikes || 'بدون لایک' }}</div>
@@ -13,13 +13,13 @@
       <div class="col">
         <q-btn
           v-if="category.clikes.length > 0"
-          @click="unlike(category.id)"
+          @click="unlike(index)"
           icon="favorite"
           color="red"
           unelevated
           round
         />
-        <q-btn v-else @click="like(category.id)" icon="favorite_outline" unelevated round />
+        <q-btn v-else @click="like(index)" icon="favorite_outline" unelevated round />
       </div>
       <div class="col">
         <q-btn
@@ -97,15 +97,23 @@ function deletecategory(id) {
       })
     })
 }
-function unlike(categoryId) {
-  api.post(`api/category/${categoryId}/unlike`,{
-    liked : true
-  })
+function unlike(index) {
+  api
+    .post('api/category/' + categories.value[index].id + '/unlike', {
+      liked: true,
+    })
+    .then(() => {
+      categories.value[index].clikes = false
+    })
 }
 
-function like(categoryId) {
-  api.post(`api/category/${categoryId}/like`,{
-    liked : false
-  })
+function like(index) {
+  api
+    .post('api/category/' + categories.value[index].id + '/like', {
+      liked: true,
+    })
+    .then(() => {
+      categories.value[index].clikes = true
+    })
 }
 </script>
